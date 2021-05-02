@@ -1,4 +1,4 @@
-﻿namespace BWHazel.HelloQuantum.Entanglement {
+﻿namespace BWHazel.HelloQuantum.Concepts.Entanglement {
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic; 

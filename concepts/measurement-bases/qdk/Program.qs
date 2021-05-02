@@ -1,4 +1,4 @@
-﻿namespace BWHazel.HelloQuantum.MeasurementBases {
+﻿namespace BWHazel.HelloQuantum.Concepts.MeasurementBases {
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;

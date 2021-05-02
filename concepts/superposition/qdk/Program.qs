@@ -1,4 +1,4 @@
-﻿namespace BWHazel.HelloQuantum.Superposition {
+﻿namespace BWHazel.HelloQuantum.Concepts.Superposition {
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;

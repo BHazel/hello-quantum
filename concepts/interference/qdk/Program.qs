@@ -1,4 +1,4 @@
-﻿namespace BWHazel.HelloQuantum.Interference {
+﻿namespace BWHazel.HelloQuantum.Concepts.Interference {
 
     open Microsoft.Quantum.Canon;
     open Microsoft.Quantum.Intrinsic;
