@@ -1,4 +1,4 @@
-﻿namespace BWHazel.HelloQuantum.RandomNumberGenerator {
+﻿namespace BWHazel.HelloQuantum.Applications.RandomNumberGenerator {
 
     open Microsoft.Quantum.Arrays;
     open Microsoft.Quantum.Convert;
