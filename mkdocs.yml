@@ -15,3 +15,8 @@ markdown_extensions:
       check_paths: true
   - pymdownx.superfences
   - pymdownx.tabbed
+nav:
+  - Home:
+    - Welcome!: index.md
+    - Getting Started: getting-started.md
+    - Supported Platforms: supported-platforms.md
