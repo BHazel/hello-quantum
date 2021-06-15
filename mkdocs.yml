@@ -1,0 +1,17 @@
+site_name: Hello, Quantum!
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: deep purple
+    accent: green
+  features:
+    - navigation.tabs
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences
+  - pymdownx.tabbed
