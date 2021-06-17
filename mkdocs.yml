@@ -32,3 +32,7 @@ nav:
       - Code Samples: concepts/phase-kickback/code-samples.md
     - Entanglement:
       - Code Samples: concepts/entanglement/code-samples.md
+  - Applications:
+    - Home: applications/index.md
+    - Random Number Generator:
+      - Code Samples: applications/random-number-generator/code-samples.md
