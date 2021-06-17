@@ -9,12 +9,18 @@ theme:
     - navigation.tabs
 markdown_extensions:
   - admonition
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.details
   - pymdownx.highlight
   - pymdownx.snippets:
       check_paths: true
   - pymdownx.superfences
   - pymdownx.tabbed
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - Home:
     - Welcome!: index.md
