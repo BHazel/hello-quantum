@@ -20,3 +20,15 @@ nav:
     - Welcome!: index.md
     - Getting Started: getting-started.md
     - Supported Platforms: supported-platforms.md
+  - Concepts:
+    - Home: concepts/index.md
+    - Superposition:
+      - Code Samples: concepts/superposition/code-samples.md
+    - Interference:
+      - Code Samples: concepts/interference/code-samples.md
+    - Measurement Bases:
+      - Code Samples: concepts/measurement-bases/code-samples.md
+    - Phase Kickback:
+      - Code Samples: concepts/phase-kickback/code-samples.md
+    - Entanglement:
+      - Code Samples: concepts/entanglement/code-samples.md
