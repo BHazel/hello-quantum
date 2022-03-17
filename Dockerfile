@@ -2,10 +2,13 @@ FROM python
 LABEL maintainer="Benedict W. Hazel"
 SHELL ["/bin/bash", "-c"]
 
+ARG dotnet_version="3.1.416"
 ARG forest_sdk_version="2.23.0"
 
 # Install .NET Core
-RUN bash -c "$(curl -fsSL https://dot.net/v1/dotnet-install.sh)"
+RUN wget -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh && \
+    chmod 777 dotnet-install.sh && \
+    ./dotnet-install.sh --version ${dotnet_version}
 ENV DOTNET_ROOT "/root/.dotnet"
 ENV PATH "$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH"
 
