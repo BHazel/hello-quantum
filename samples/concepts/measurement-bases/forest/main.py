@@ -1,7 +1,6 @@
-import time
-from pyquil import Program, get_qc, list_quantum_computers
+from pyquil import Program, get_qc
 from pyquil.gates import *
-from pyquil.api import local_forest_runtime
+from pyquil.quilbase import Declare
 
 def superposition(repeat_count, basis_measurement):
     """Creates a superposition and measures it using a specified basis a specified number of times.
@@ -13,22 +12,29 @@ def superposition(repeat_count, basis_measurement):
     Returns:
         int: The measurement count where the result is 1.
     """
-    program = Program()
+    # Initialise program with classical bit register.
+    program = Program(
+        Declare('c', "BIT", 1),
+    )
+
     program += H(0)
     basis_measurement(program, 0)
+    program += MEASURE(0, 'c')
+    program.wrap_in_numshots_loop(repeat_count)
 
-    with local_forest_runtime():
-        # Initialise simulator and run circuit a specified number of times.
-        quantum_virtual_machine = get_qc('9q-square-qvm')
-        qubit_result_counts = quantum_virtual_machine.run_and_measure(program, trials=repeat_count)
-        
-        # Loop through results and update count if result is 1.
-        ones_count = 0
-        for result in qubit_result_counts[0]:
-            if result == 1:
-                ones_count += 1
-        
-        return ones_count
+    # Initialise simulator and run circuit a specified number of times.
+    quantum_virtual_machine = get_qc('9q-square-qvm')
+    qubit_result_counts = quantum_virtual_machine.run(
+        quantum_virtual_machine
+            .compile(program)).readout_data.get('c')
+    
+    # Loop through results and update count if result is 1.
+    ones_count = 0
+    for result in qubit_result_counts:
+        if result == 1:
+            ones_count += 1
+
+    return ones_count
 
 def measure_x(program, qubit):
     """Measures a specified qubit in the Hadamard (X) basis.
@@ -54,9 +60,6 @@ repeat_count = 1000
 
 # Create and measure a superposition in the Computational Basis (Z-Basis).
 result_ones_count_computational = superposition(repeat_count, measure_z)
-
-# Pause for 1 second to allow for connection to quantum virtual machine to close.
-time.sleep(1)
 
 # Create and measure a superposition in the Hadamard Basis (X-Basis).
 result_ones_count_hadamard = superposition(repeat_count, measure_x)

@@ -1,7 +1,6 @@
-import time
-from pyquil import Program, get_qc, list_quantum_computers
+from pyquil import Program, get_qc
 from pyquil.gates import *
-from pyquil.api import local_forest_runtime
+from pyquil.quilbase import Declare
 
 def interference(repeat_count, starting_state):
     """Creates a superposition and applies interference on a qubit in a specified state a specified number of times.
@@ -13,10 +12,13 @@ def interference(repeat_count, starting_state):
     Returns:
         int: The measurement count where the result is 1.
     """
-    # Initialise program.
+    # Initialise program with classical bit register.
+    program = Program(
+        Declare('c', "BIT", 1)
+    )
+
     # Set qubit to desired starting state.
     # If the starting state should be 1, apply the X gate.
-    program = Program()
     if starting_state == 1:
         program += X(0)
     
@@ -25,19 +27,22 @@ def interference(repeat_count, starting_state):
 
     # Apply Hadamard gate to cause interference to restore qubit to its starting state.
     program += H(0)
+    program += MEASURE(0, 'c')
+    program.wrap_in_numshots_loop(repeat_count)
 
-    with local_forest_runtime():
-        # Initialise simulator and run circuit a specified number of times.
-        quantum_virtual_machine = get_qc('9q-square-qvm')
-        qubit_result_counts = quantum_virtual_machine.run_and_measure(program, trials=repeat_count)
-
-        # Loop through results and update count if result is 1.
-        ones_count = 0
-        for result in qubit_result_counts[0]:
-            if result == 1:
-                ones_count += 1
-        
-        return ones_count
+    # Initialise simulator and run circuit a specified number of times.
+    quantum_virtual_machine = get_qc('9q-square-qvm')
+    qubit_result_counts = quantum_virtual_machine.run(
+        quantum_virtual_machine
+            .compile(program)).readout_data.get('c')
+    
+    # Loop through results and update count if result is 1.
+    ones_count = 0
+    for result in qubit_result_counts:
+        if result == 1:
+            ones_count += 1
+    
+    return ones_count
 
 print('*** Hello, Quantum! - Interference (Forest) ***')
 
@@ -45,9 +50,6 @@ repeat_count = 1000
 
 # Cause interference on a qubit starting in the 0 state.
 result_counts_starting_state_0 = interference(repeat_count, 0)
-
-# Pause for 1 second to allow for connection to quantum virtual machine to close.
-time.sleep(1)
 
 # Cause interference on a qubit starting in the 1 state.
 result_counts_starting_state_1 = interference(repeat_count, 1)
