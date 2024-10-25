@@ -30,8 +30,10 @@ nav:
     - Home: concepts/index.md
     - Superposition:
       - Code Samples: concepts/superposition/code-samples.md
+      - Mathematics: concepts/superposition/mathematics.md
     - Interference:
       - Code Samples: concepts/interference/code-samples.md
+      - Mathematics: concepts/interference/mathematics.md
     - Measurement Bases:
       - Code Samples: concepts/measurement-bases/code-samples.md
     - Phase Kickback:
@@ -42,3 +44,5 @@ nav:
     - Home: applications/index.md
     - Random Number Generator:
       - Code Samples: applications/random-number-generator/code-samples.md
+    - Teleportation:
+      - Mathematics: applications/teleportation/mathematics.md
